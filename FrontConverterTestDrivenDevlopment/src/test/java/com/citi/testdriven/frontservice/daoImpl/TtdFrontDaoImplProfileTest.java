@@ -11,21 +11,25 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.citi.testdriven.frontservice.dao.TtdFrontDao;
 
-@SpringBootTest
+/*@SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 @ExtendWith(SpringExtension.class)
-@ActiveProfiles(value = "test")
+@ActiveProfiles(value = "test")*/
 public class TtdFrontDaoImplProfileTest {
 	
 	@Autowired
-	TtdFrontDao dao;
+	TtdFrontDao dao = new TtdFrontDaoImplStatic();
 	
+	@Autowired
+	TtdFrontDaoImplStatic daoImplStatic;
 	
-	@Bean
+
 	public void testProfile() {
 		String convertedUnit ="km-meter";
 		
-		dao.getFormula(convertedUnit);
+		daoImplStatic.getFormula(convertedUnit);
+		System.out.println("inside TtdFrontDaoImplProfileTest::"
+		+dao.getFormula(convertedUnit));
 		
 		
 	}
