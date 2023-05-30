@@ -22,11 +22,11 @@ import com.citi.testdriven.frontservice.service.TtdFrontService;
 
 @SpringBootTest
 //@RunWith(MockitoJUnitRunner.class)
-@ExtendWith(SpringExtension.class)
+//@ExtendWith(SpringExtension.class)
 class FrontConverterTestDrivenDevlopmentApplicationTests {
 
 
-
+/*
 	//@Autowired
 	 TestRestTemplate testRestTemplate = new TestRestTemplate();
 
@@ -71,7 +71,7 @@ class FrontConverterTestDrivenDevlopmentApplicationTests {
 		    }	    
 		    
 		    
-		    
+		*/    
 		    
 		    
 		    

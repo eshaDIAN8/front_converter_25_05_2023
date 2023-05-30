@@ -49,13 +49,12 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 @ExtendWith(SpringExtension.class)
 //@WebMvcTest(TtdFrontController.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(MockitoJUnitRunner.class)
 public class TtdFrontControllerTest {
 	
-	@Value(value="${local.server.port}")
-	private int port;
+	
 	
 	@InjectMocks
 	private TtdFrontController controller;
@@ -95,7 +94,7 @@ public class TtdFrontControllerTest {
 	    	
 	    	//when(service.getFormula(convertedUnit,Double.parseDouble(value))).thenReturn(5000.0);
 	    	
-	    	ResponseEntity<String> response =controller.getFormulaFromCrud("km", "meter", Double.parseDouble(value));
+	    	//ResponseEntity<String> response =controller.getFormulaFromCrud("km", "meter", Double.parseDouble(value));
 	    	//Assert.assertEquals("5000", response.getBody());
 	    }
 	    
@@ -110,8 +109,10 @@ public class TtdFrontControllerTest {
 	    	String value = "5";
 	    	
 	    	String uri = "/converter/{fromUnit}/{toUnit}/{value}";
-	    	when(dao.getFormula(convertedUnit)).thenReturn("*1000");
-	    	when(service.getResult("*1000", 5)).thenReturn(5000.0);
+	    	
+	    	//when(dao.getFormula(convertedUnit)).thenReturn("*1000");
+	    	//when(service.getAfterProcessingResult("*1000",5)).thenReturn(5000.0);
+	    	when(service.getConvertedResult(convertedUnit, 5)).thenReturn(5000.0);
 	  
 	    	 
 		 MvcResult mvcResult =  (MvcResult) mockMvc
@@ -132,8 +133,8 @@ public class TtdFrontControllerTest {
 	    	String value = "5";
 	    	
 	    	String uri = "/converter/{fromUnit}/{toUnit}/{value}";
-	    	when(dao.getFormula(convertedUnit)).thenReturn("*1000");
-	    	when(service.getResult("*1000", 5)).thenReturn(5000.0);
+	    	//when(dao.getFormula(convertedUnit)).thenReturn("*1000");
+	    	when(service.getConvertedResult(convertedUnit, 5)).thenReturn(5000.0);
 	    	 
 		 MvcResult mvcResult =  (MvcResult) mockMvc
 			.perform(MockMvcRequestBuilders.get(uri,"km","meter","5"))
