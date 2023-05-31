@@ -4,12 +4,15 @@ import static org.mockito.Mockito.when;
 
 import org.json.JSONException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,24 +27,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.client.RestTemplate;
 
 import com.citi.testdriven.frontservice.dao.TtdFrontDao;
 
 @RunWith(MockitoJUnitRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@WebMvcTest
+//@WebMvcTest
+@ExtendWith(MockitoExtension.class)
 public class TtdFront_Dao_Imp_Integration_Test {
 	
+	@InjectMocks
+	TtdFrontDao dao = new TtdFrontDaoImpl() ;	
 	
-	TtdFrontDao dao = new TtdFrontDaoImpl() ;		
 	@Value(value="${local.server.port}")
 	private int port;
 	@Mock
-	private TestRestTemplate testRestTemp ;
+	private RestTemplate testRestTemp ;
 		
 	
-	
+	@Before
+	public void setup() {
+		//dao = new TtdFrontDaoImpl();
+	}
 	
 	
 	
@@ -58,16 +67,16 @@ public class TtdFront_Dao_Imp_Integration_Test {
 	
 	
 	@Test
-	public void getFormulaStaticData() throws JSONException {
+	public void getFormulaStaticData()  {
 		
 		String convertedUnit ="meter-cm";	
 		
-		String uri = "http://localhost:8080/getConvertedUnit/meter-cm";	
+		//String uri = "http://localhost:8080/getConvertedUnit/";	
 		
-    	//when(testRestTemp.getForObject(uri, String.class)).thenReturn("*100");
+		//Mockito.when(testRestTemp.getForObject(uri+convertedUnit, String.class)).thenReturn("*100");
     	
     	
-    	when(testRestTemp.getForObject("http://localhost:"+ port + "/getConvertedUnit/meter-cm", 
+		Mockito.when(testRestTemp.getForObject("http://localhost:8080" + "/getConvertedUnit/"+convertedUnit, 
     			String.class)).thenReturn("*100");
     	String formula = dao.getFormula(convertedUnit);
     	System.out.println("formula::"+formula);

@@ -29,7 +29,7 @@ public class TtdFrontController {
 	
 	@GetMapping("/{fromUnit}/{toUnit}/{value}")
 	public ResponseEntity<String> getFormulaFromCrud(@PathVariable String fromUnit,
-			@PathVariable String toUnit,@PathVariable double value) throws JsonProcessingException, JSONException {
+			@PathVariable String toUnit,@PathVariable double value)  {
 		
 		
 		String convertedUnit = fromUnit+"-"+toUnit;

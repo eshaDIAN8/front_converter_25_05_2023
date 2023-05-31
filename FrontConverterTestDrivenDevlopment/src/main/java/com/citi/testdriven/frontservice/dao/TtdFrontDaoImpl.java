@@ -14,7 +14,7 @@ public class TtdFrontDaoImpl implements TtdFrontDao {
 	
 	
 	@Autowired
-    private RestTemplate restTmp =  new RestTemplate();
+    private RestTemplate restTmp ;
 	
 	private String formula;
 	

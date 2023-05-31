@@ -43,7 +43,7 @@ public class TtdFrontServiceTest {
     	when(dao.getFormula(convertedUnit)).thenReturn("*100");
     	double convertedResult = service.getConvertedResult(convertedUnit, 5);
     	String convertedResult1 = String.valueOf(convertedResult);
-    	// Assert.assertEquals(500,convertedResult );
+    	 Assert.assertEquals("500.0", convertedResult1);
     	
     
 	}

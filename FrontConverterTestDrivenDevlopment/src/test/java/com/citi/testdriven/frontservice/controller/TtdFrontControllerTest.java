@@ -6,6 +6,7 @@ package com.citi.testdriven.frontservice.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
+import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -83,19 +84,19 @@ public class TtdFrontControllerTest {
 	     
 
 	    @Test
-		public void test_Controller_Method_UnitTesting_failure_Scenario() throws JsonProcessingException, NumberFormatException {
+		public void test_Controller_Method_UnitTesting_failure_Scenario()   {
 	    	
 	    	String fromUnit ="km";
 	    	String toUnit = "meter";
 	    	String convertedUnit = fromUnit+"-"+toUnit;
 	    	String value = "5";
 	    	
-	    	//String uri = "/converter/{fromUnit}/{toUnit}/{value}";
+	    	String uri = "/converter/{fromUnit}/{toUnit}/{value}";
 	    	
-	    	//when(service.getFormula(convertedUnit,Double.parseDouble(value))).thenReturn(5000.0);
+	    	when(service.getConvertedResult(convertedUnit,Double.parseDouble(value))).thenReturn(5000.0);
 	    	
-	    	//ResponseEntity<String> response =controller.getFormulaFromCrud("km", "meter", Double.parseDouble(value));
-	    	//Assert.assertEquals("5000", response.getBody());
+	    	ResponseEntity<String> response = controller.getFormulaFromCrud("km", "meter", Double.parseDouble(value));
+	    	Assert.assertEquals("5000.0", response.getBody());
 	    }
 	    
 	    
